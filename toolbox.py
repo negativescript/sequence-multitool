@@ -35,10 +35,14 @@ def revComplement(seq):
 			revcomp += dc.dnaBaseComplement[base]
 	return revcomp
 
-def orfLocator(seq):
+def orfLocator(seq,frame):
 	startCodonPos=[]
 	stopCodonPos=[]
-	for index in range(0,len(seq), dc.codonLength):
+	if frame <=2:
+		startPos = frame
+	elif frame >2:
+		startPos = frame-3
+	for index in range(startPos,len(seq), dc.codonLength):
 		if seq[index:index+3] in dc.dnaStartCd:
 			startCodonPos.append(index)
 		elif seq[index:index+3] in dc.dnaStopCd:
